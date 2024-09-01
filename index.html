@@ -4,25 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minigame mit Mikrotransaktionen</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        #gameArea { margin-top: 50px; }
-        #status { margin-top: 20px; font-weight: bold; }
-        button { padding: 10px 20px; font-size: 16px; }
-    </style>
 </head>
 <body>
     <h1>Willkommen zum Minigame!</h1>
-    <div id="gameArea">
-        <p>Drücke auf "Spielen" um zu starten!</p>
-        <button id="playButton">Spielen - 100 Token</button>
-    </div>
-    <div id="status"></div>
+    <button id="playButton">Spielen (100 Token)</button>
+    <p id="status"></p>
+    <div id="gameArea"></div>
 
-    <!-- Polkadot.js Bibliotheken -->
-    <script src="https://unpkg.com/@polkadot/api@10.0.1/dist/polkadot-api.min.js"></script>
-    <script src="https://unpkg.com/@polkadot/extension-dapp@9.0.0/dist/polkadot-extensions-dapp.umd.min.js"></script>
-    <!-- Dein Skript -->
+    <!-- Polkadot.js API und SubWallet API -->
+    <script src="https://unpkg.com/@polkadot/api@9.13.2/dist/polkadot-api.min.js"></script>
+    <script src="https://unpkg.com/@polkadot/extension-dapp@8.2.1/dist/polkadot-extensions-dapp.umd.min.js"></script>
+    <script src="https://unpkg.com/subwallet-extension-dapp@1.0.2/dist/subwallet-extension-dapp.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
