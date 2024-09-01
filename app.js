@@ -1,10 +1,3 @@
-// app.js
-
-import { ApiPromise, WsProvider } from '@polkadot/api';
-
-const wsProvider = new WsProvider('wss://rpc.polkadot.io');
-const polkadotApi = await ApiPromise.create({ provider: wsProvider });
-
 document.getElementById('playButton').addEventListener('click', async () => {
     document.getElementById('status').innerText = 'Starte Transaktion...';
     try {
@@ -23,21 +16,21 @@ document.getElementById('playButton').addEventListener('click', async () => {
 
 // Initialisiere die Blockchain-Verbindung
 async function initBlockchain() {
-    const provider = new polkadotApi.WsProvider('wss://aleph-zero-rpc.dwellir.com'); // Ersetze durch deine Aleph Zero Node URL
+    const provider = new polkadotApi.WsProvider('wss://mainnet.alephzero.org');
     const api = await polkadotApi.ApiPromise.create({ provider });
     await api.isReady;
     return api;
 }
 
-// Holen der Konten aus der Polkadot-Extension
+// Holen der Konten aus der SubWallet-Extension
 async function getUserAccount() {
-    const allInjected = await polkadotExtensions.enable('Minigame');
-    if (allInjected.length === 0) throw new Error('Keine Wallet-Extension gefunden');
+    const allInjected = await subwalletExtension.enable('Minigame');
+    if (allInjected.length === 0) throw new Error('Keine SubWallet-Extension gefunden');
 
-    const accounts = await polkadotExtensions.web3Accounts();
+    const accounts = await subwalletExtension.web3Accounts();
     if (accounts.length === 0) throw new Error('Keine Konten gefunden');
 
-    const injector = await polkadotExtensions.web3FromAddress(accounts[0].address);
+    const injector = await subwalletExtension.web3FromAddress(accounts[0].address);
     return { address: accounts[0].address, signer: injector.signer };
 }
 
