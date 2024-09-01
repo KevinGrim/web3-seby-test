@@ -1,3 +1,5 @@
+console.log('Skripte geladen und app.js gestartet');
+
 document.getElementById('playButton').addEventListener('click', async () => {
     document.getElementById('status').innerText = 'Starte Transaktion...';
     try {
@@ -16,14 +18,17 @@ document.getElementById('playButton').addEventListener('click', async () => {
 
 // Initialisiere die Blockchain-Verbindung
 async function initBlockchain() {
-    const provider = new polkadotApi.WsProvider('wss://aleph-zero-rpc.dwellir.com');
+    console.log('Initialisiere Blockchain-Verbindung...');
+    const provider = new polkadotApi.WsProvider('wss://mainnet.alephzero.org');
     const api = await polkadotApi.ApiPromise.create({ provider });
     await api.isReady;
+    console.log('Blockchain verbunden');
     return api;
 }
 
 // Holen der Konten aus der SubWallet-Extension
 async function getUserAccount() {
+    console.log('Hole Benutzerkonto aus SubWallet...');
     const allInjected = await subwalletExtension.enable('Minigame');
     if (allInjected.length === 0) throw new Error('Keine SubWallet-Extension gefunden');
 
@@ -36,8 +41,9 @@ async function getUserAccount() {
 
 // Transaktion ausführen
 async function transferTokens(api, senderAddress, signer, recipient, amount) {
+    console.log('Starte Token-Transfer...');
     return new Promise((resolve, reject) => {
-        const transfer = api.tx.balances.transfer(recipient, amount * 10**12); // Anpassung je nach Token Dezimalstellen
+        const transfer = api.tx.balances.transfer(recipient, amount * 10**12);
 
         transfer.signAndSend(senderAddress, { signer }, (result) => {
             if (result.status.isInBlock) {
@@ -52,5 +58,6 @@ async function transferTokens(api, senderAddress, signer, recipient, amount) {
 
 // Beispiel-Spiel-Logik
 function startGame() {
+    console.log('Spiel gestartet');
     document.getElementById('gameArea').innerHTML = '<p>Das Spiel läuft! Viel Spaß!</p>';
 }
