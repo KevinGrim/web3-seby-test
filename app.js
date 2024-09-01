@@ -16,7 +16,7 @@ document.getElementById('playButton').addEventListener('click', async () => {
 
 // Initialisiere die Blockchain-Verbindung
 async function initBlockchain() {
-    const provider = new polkadotApi.WsProvider('wss://aleph-zero.api.onfinality.io/public-ws');
+    const provider = new polkadotApi.WsProvider('wss://aleph-zero-rpc.dwellir.com');
     const api = await polkadotApi.ApiPromise.create({ provider });
     await api.isReady;
     return api;
