@@ -1,5 +1,10 @@
 // app.js
 
+import { ApiPromise, WsProvider } from '@polkadot/api';
+
+const wsProvider = new WsProvider('wss://rpc.polkadot.io');
+const polkadotApi = await ApiPromise.create({ provider: wsProvider });
+
 document.getElementById('playButton').addEventListener('click', async () => {
     document.getElementById('status').innerText = 'Starte Transaktion...';
     try {
